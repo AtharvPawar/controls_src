@@ -1,4 +1,4 @@
-/** Hi
+/**
  * @file offb_node.cpp
  * @brief Offboard control example node, written with MAVROS version 0.19.x, PX4 Pro Flight
  * Stack and tested in Gazebo SITL
@@ -120,25 +120,27 @@ int main(int argc, char **argv)
             pose.pose.position.x = 0;
             pose.pose.position.y = 0;
             pose.pose.position.z = 1;
-            for(int i = 20; ros::ok() && i > 0; --i) {
+            /*for(int i = 100; ros::ok() && i > 0; --i) {
                 local_pos_pub.publish(pose);
                 ros::spinOnce();
                 rate.sleep();
-            }
+            }*/
+            local_pos_pub.publish(pose);
             isNewRequest = false;
         }
         if (command == "ox") {
             pose.pose.position.x = 0;
             pose.pose.position.y = -0.5;
             pose.pose.position.z = 1;
-            for(int i = 20; ros::ok() && i > 0; --i) {
+            /*for(int i = 100; ros::ok() && i > 0; --i) {
                 local_pos_pub.publish(pose);
                 ros::spinOnce();
                 rate.sleep();
-            }
+            }*/
+            local_pos_pub.publish(pose);
             isNewRequest = false;
          }
-        else if (command == "l") {
+        if (command == "l") {
             offb_set_mode.request.custom_mode = "ALTCTL";
             if( current_state.mode != "ALTCTL" &&
             (ros::Time::now() - last_request > ros::Duration(5.0) || isNewRequest ) ) {
